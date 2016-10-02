@@ -1,0 +1,243 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  fileProcess.c
+ *
+ *    Description:  This source file contains all function definitions for the program.
+ *
+ *        Version:  1.0
+ *        Created:  9/16/2016 10:03:02 PM
+ *       Revision:  none
+ *       Compiler:  msft c
+ *
+ *         Author:  Edgar Perez 
+ *   Organization:  Washington State University
+ *
+ * =====================================================================================
+ */
+
+#include	"fileProcess.h"
+
+FILE * open_input_file(void){
+	FILE *infile;
+	infile = fopen("input.dat", "r");
+	return infile;
+}
+
+char read_character(FILE *infile){
+	char input = ' ';
+	fscanf(infile, "%c", &input);
+	return input;
+}
+
+int determine_ascii_value(char character){
+	int ascii_value = 0;
+	ascii_value = (int)character;
+	return ascii_value;
+}
+
+int is_line(char character){
+	int line = 0;
+	if(character == '\n'){
+		line = NEWLINE;
+	}
+	else{
+		line = NOT_NEWLINE;
+	}
+	return line;
+}
+
+int number_lines(char character, int current_number_lines){
+	if(is_line(character) == NEWLINE){
+		++current_number_lines;
+	}
+	return current_number_lines;
+}
+
+int is_vowel(char character){
+	int vowel = 0;
+	if(determine_ascii_value(character) == 65 ||
+			determine_ascii_value(character) == 69 ||
+			determine_ascii_value(character) == 73 ||
+			determine_ascii_value(character) == 79 ||
+			determine_ascii_value(character) == 85 ||
+			determine_ascii_value(character) == 97 ||
+			character == 'e' ||
+			determine_ascii_value(character) == 105 ||
+			determine_ascii_value(character) == 111 ||
+			determine_ascii_value(character) == 117){
+		vowel = VOWEL;
+	}
+	else{
+		vowel = NOT_VOWEL;
+	}
+	return vowel;
+}
+
+int number_vowels(char character, int current_number_vowels){
+	if(is_vowel(character) == VOWEL){
+		++current_number_vowels;
+	}
+	return current_number_vowels;
+}
+
+int is_digit(char character){
+	int digit = 0;
+	if(determine_ascii_value(character) == 48 ||
+			determine_ascii_value(character) == 49 ||
+			determine_ascii_value(character) == 50 ||
+			determine_ascii_value(character) == 51 ||
+			determine_ascii_value(character) == 52 ||
+			determine_ascii_value(character) == 53 ||
+			determine_ascii_value(character) == 54 ||
+			determine_ascii_value(character) == 55 ||
+			determine_ascii_value(character) == 56 ||
+			determine_ascii_value(character) == 57){
+		digit = DIGIT;
+	}
+	else{
+		digit = NOT_DIGIT;
+	}
+	return digit;
+}
+
+int number_digits(char character, int current_number_digits){
+	if(is_digit(character) == DIGIT){
+		++current_number_digits;
+	}
+	return current_number_digits;
+}
+
+int is_alpha(char character){
+	int alpha = 0;
+	if((determine_ascii_value(character) >= 65 && determine_ascii_value(character) <= 90) || (determine_ascii_value(character) >= 97 && determine_ascii_value(character) <= 122)){
+		alpha = ALPHA;
+	}
+	else{
+		alpha = NOT_ALPHA;
+	}
+	return alpha;
+}
+
+int number_alphas(char character, int current_number_alphas){
+	if(is_alpha(character) == ALPHA){
+		++current_number_alphas;
+	}
+	return current_number_alphas;
+}
+
+int is_lower(char character){
+	int lower = 0;
+	if(determine_ascii_value(character) >= 97 && determine_ascii_value(character) <= 122){
+		lower = LOWER;
+	}
+	else{
+		lower = NOT_LOWER;
+	}
+	return lower;
+}
+
+int number_lowers(char character, int current_number_lowers){
+	if(is_lower(character) == LOWER){
+		++current_number_lowers;
+	}
+	return current_number_lowers;
+}
+
+int is_upper(char character){
+	int upper = 0;
+	if(determine_ascii_value(character) >= 65 && determine_ascii_value(character) <= 90){
+		upper = UPPER;
+	}
+	else{
+		upper = NOT_UPPER;
+	}
+	return upper;
+}
+
+int number_uppers(char character, int current_number_uppers){
+	if(is_upper(character) == UPPER){
+		++current_number_uppers;
+	}
+	return current_number_uppers;
+}
+
+int is_space(char character){
+	int space = 0;
+	if(character == ' ' || character == '\f' || character == '\n' || character == '\r' || character == '\t' || character == '\v'){
+		space = WHITESPACE;
+	}
+	else{
+		space = NOT_WHITESPACE;
+	}
+	return space;
+}
+
+int number_spaces(char character, int current_number_spaces){
+	if(is_space(character) == WHITESPACE){
+		++current_number_spaces;
+	}
+	return current_number_spaces;
+}
+
+int is_alnum(char character){
+	int alnum = 0;
+	if((determine_ascii_value(character) >= 48 && determine_ascii_value(character) <= 57) || (determine_ascii_value(character) >= 65 && determine_ascii_value(character) <= 122)){
+		alnum = ALNUM;
+	}
+	else{
+		alnum = NOT_ALNUM;
+	}
+	return alnum;
+}
+
+int number_alnums(char character, int current_number_alnums){
+	if(is_alnum(character) == ALNUM){
+		++current_number_alnums;
+	}
+	return current_number_alnums;
+}
+
+int is_punct(char character){
+	int punct = 0;
+	if((determine_ascii_value(character) >= 33 && determine_ascii_value(character) <= 47) || (determine_ascii_value(character) >= 58 && determine_ascii_value(character) <= 64) || (determine_ascii_value(character) >= 91 && determine_ascii_value(character) <= 96) || (determine_ascii_value(character) >= 123 && determine_ascii_value(character) <= 126)){
+		punct = PUNCT;
+	}
+	else{
+		punct = NOT_PUNCT;
+	}
+	return punct;
+}
+
+int number_puncts(char character, int current_number_puncts){
+	if(is_punct(character) == PUNCT){
+		++current_number_puncts;
+	}
+	return current_number_puncts;
+}
+
+void print_int(FILE *outfile, int number){
+	fprintf(outfile, "%d\n", number);
+}
+
+void print_stats(FILE *outfile, char header[], int number){
+	fprintf(outfile, "%s\t%d\n", header, number);
+}
+
+void evaluate(char character, int number_line, int number_vowel, int number_digit, int number_alpha, int number_lower, int number_upper, int number_space, int number_alnum, int number_punct){
+	number_lines(character, number_line);
+	number_vowels(character, number_vowel);
+	number_digits(character, number_digit);
+	number_alphas(character, number_alpha);
+	number_lowers(character, number_lower);
+	number_uppers(character, number_upper);
+	number_spaces(character, number_space);
+	number_alnums(character, number_alnum);
+	number_puncts(character, number_punct);
+}
+
+void close(FILE *infile, FILE *outfileOne, FILE *outfileTwo){
+	fclose(infile);
+	fclose(outfileOne);
+	fclose(outfileTwo);
+}
